@@ -21,9 +21,26 @@ const ListPostComponents = () => {
 
   return (
      <div>
-
-     <h2 className='text-center'>List of Posts</h2>
-     <br></br>
+        <br></br>
+        <br></br>
+         <div className="row">
+         <div className="col-md-5">
+         <div className="form-group">
+                  <form className="form-inline" th:action="@{search}">
+                      <div className="input-group">
+                             <label>
+                                 <input type="text" class="form-control" name="query" />
+                             </label>
+                           <span className="input-group-btn">
+                               <button className="btn btn-primary" type="submit"> Search</button>
+                           </span>
+                     </div>
+                 </form>
+              </div>
+         </div>
+         </div>
+     <h2 className='text-center'>Posts</h2>
+     
      <table className='table table-striped table-bordered'>
          <thead>
              <tr>
@@ -41,9 +58,12 @@ const ListPostComponents = () => {
                      <tr key={post.id}>
                          {/* <td>{post.id}</td> */}
                          <td>{post.title}</td>
-                         <td>{post.imageFile}</td>
+                         <td>
+                         <img th:src="@{'/images/' + ${post.getImageFile}}" alt="Post Image" width="100"/>
+                         </td>
                          <td>{post.addedAt}</td>
                          {/* <td>{post.content}</td> */}
+                         <button className='btn btn-info' onClick={() => view(post.id)}>View</button>
                      </tr>)
              }
          </tbody>
